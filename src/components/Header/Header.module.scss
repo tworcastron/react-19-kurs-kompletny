@@ -1,5 +1,7 @@
+$height: 100px;
+
 .header {
-  min-height: 50px;
+  min-height: $height;
   background-color: #cdcdcd;
   background: url(../../assets/images/header.jpg) center;
   background-size: cover;
