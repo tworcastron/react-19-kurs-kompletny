@@ -1,14 +1,16 @@
 export default function Searchbar() {
-  const styles = { borderRadius: 8 }
+  const styles = { borderRadius: 8, marginRight: 5 }
 
   return (
-    <>
+    <div className="d-flex">
       <input 
         placeholder='Szukaj...'
         style={styles}
-        className="input"
+        className="form-control"
       />
-      <button className="button">Szukaj</button>
-    </>
+      <button type="button" class="btn btn-primary">
+        Szukaj
+      </button>
+    </div>
   )
 }
