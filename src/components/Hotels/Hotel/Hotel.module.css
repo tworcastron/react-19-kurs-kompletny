@@ -2,5 +2,10 @@
   border: 1px solid #cdcdcd;
   margin-bottom: 10px;
   background-color: #efefef;
-  padding: 5px;
+  padding: 10px 20px;
+}
+.description {
+  margin-top: 10px;
+  color: #636363;
+  font-size: 0.9rem;
 }
