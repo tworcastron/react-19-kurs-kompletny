@@ -6,8 +6,9 @@ export default function Searchbar() {
       <input 
         placeholder='Szukaj...'
         style={styles}
+        className="input"
       />
-      <button>Szukaj</button>
+      <button className="button">Szukaj</button>
     </>
   )
 }
