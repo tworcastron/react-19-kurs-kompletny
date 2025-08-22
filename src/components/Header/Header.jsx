@@ -1,14 +1,11 @@
 import styles from './Header.module.css'
+import Searchbar from './Searchbar/Searchbar'
 
 export default function Header() {
   return (
     <div className={styles.header}>
       <div>
-        <input 
-          placeholder='Szukaj...'
-          className={styles.input}
-        />
-        <button>Szukaj</button>
+        <Searchbar />
       </div>
     </div>
   )
