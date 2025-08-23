@@ -1,6 +1,17 @@
 import styles from './Hotel.module.css'
 // import hotelImg from '../../../assets/images/hotel.jpg'
 
+/**
+ * Hotel component
+ * @param {{
+ *  id: number;
+ *  name: string;
+ *  city: string;
+ *  rating: string;
+ *  description: string;
+ *  image: string;
+ * }} props
+ */
 export default function Hotel(props) {
   const { name, city, rating, description, image } = props
 
