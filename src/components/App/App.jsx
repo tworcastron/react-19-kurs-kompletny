@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Header from '../Header/Header'
 import Hotels from '../Hotels/Hotels'
 import Menu from '../Menu/Menu'
 import './App.css'
+import LoadingIcon from '../UI/LoadingIcon/LoadingIcon'
 
 const initHotels = [
   {
@@ -24,7 +25,16 @@ const initHotels = [
 ]
 
 function App() {
-  const [hotels, setHotels] = useState(initHotels)
+  const [hotels, setHotels] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    // symulacja pobrania danych z BE
+    setTimeout(() => {
+      setHotels(initHotels)
+      setLoading(false)
+    }, 2000)
+  }, [])
 
   const onSearch = (query) => {
     // console.log('App szukaj', query)
@@ -39,7 +49,9 @@ function App() {
     <>
       <Header onSearch={onSearch} />
       <Menu />
-      <Hotels hotels={hotels} />
+      {loading
+        ? <LoadingIcon />
+        : <Hotels hotels={hotels} />}
     </>
   )
 }
