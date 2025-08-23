@@ -1,12 +1,12 @@
 import { useState } from "react"
 
-export default function Searchbar() {
+export default function Searchbar(props) {
   const [value, setValue] = useState('')
 
   const styles = { borderRadius: 8, marginRight: 5 }
 
   const onSearch = () => {
-    console.log('szukaj', value)
+    props.onSearch(value)
   }
   const onKeyDown = (e) => {
     if (e.code === 'Enter') onSearch()
