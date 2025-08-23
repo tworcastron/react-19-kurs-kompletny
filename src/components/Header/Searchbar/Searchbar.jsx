@@ -8,6 +8,9 @@ export default function Searchbar() {
   const onSearch = () => {
     console.log('szukaj', value)
   }
+  const onKeyDown = (e) => {
+    if (e.code === 'Enter') onSearch()
+  }
 
   return (
     <div className="d-flex">
@@ -17,6 +20,8 @@ export default function Searchbar() {
         className="form-control"
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        onKeyDown={onKeyDown}
+        // onKeyDown={e => e.code === 'Enter' && onSearch()}
       />
       <button
         type="button"
