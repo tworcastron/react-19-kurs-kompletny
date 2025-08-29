@@ -13,7 +13,7 @@ import styles from './Hotel.module.css'
  * }} props
  */
 export default function Hotel(props) {
-  const { name, city, rating, description, image } = props
+  const { name, city, rating, description, image, themeColor } = props
 
   return (
     <div className={styles.hotel}>
@@ -37,7 +37,7 @@ export default function Hotel(props) {
       <p className={styles.description}>{description}</p>
 
       <div className="text-end">
-        <button className='btn btn-primary'>Pokaż</button>
+        <button className={`btn btn-${themeColor}`}>Pokaż</button>
       </div>
     </div>
   )

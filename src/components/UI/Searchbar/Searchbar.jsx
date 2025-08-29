@@ -25,7 +25,7 @@ export default function Searchbar(props) {
       />
       <button
         type="button"
-        className="btn btn-primary"
+        className={`btn btn-${props.themeColor}`}
         onClick={onSearch}
       >
         Szukaj

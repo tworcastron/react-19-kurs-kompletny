@@ -6,6 +6,8 @@ import './App.css'
 import LoadingIcon from '../UI/LoadingIcon/LoadingIcon'
 import Searchbar from '../UI/Searchbar/Searchbar'
 import Layout from '../Layout/Layout'
+import Footer from '../Footer/Footer'
+import ThemeButton from '../UI/ThemeButton/ThemeButton'
 
 const initHotels = [
   {
@@ -29,6 +31,7 @@ const initHotels = [
 function App() {
   const [hotels, setHotels] = useState([])
   const [loading, setLoading] = useState(true)
+  const [themeColor, setThemeColor] = useState('primary') // danger, warning
 
   useEffect(() => {
     // symulacja pobrania danych z BE
@@ -47,21 +50,28 @@ function App() {
     setHotels(filteredHotels)
   }
 
+  const changeColor = () => {
+    setThemeColor(themeColor === 'danger' ? 'primary' : 'danger')
+  }
+
   return (
     <>
       <Layout
         header={
           <Header>
-            <Searchbar onSearch={onSearch}  />
+            <div className='d-flex' style={{ gap: 10 }}>
+              <Searchbar onSearch={onSearch} themeColor={themeColor}  />
+              <ThemeButton onChange={changeColor} />
+            </div>
           </Header>
         }
         menu={<Menu />}
         content={
           loading
             ? <LoadingIcon />
-            : <Hotels hotels={hotels} />
+            : <Hotels hotels={hotels} themeColor={themeColor} />
         }
-        footer={<p>Stopka</p>}
+        footer={<Footer themeColor={themeColor} />}
       />
     </>
   )

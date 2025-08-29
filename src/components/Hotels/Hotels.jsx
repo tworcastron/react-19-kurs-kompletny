@@ -9,7 +9,7 @@ const Hotels = (props) => {
       }}>
         <h2>Oferty:</h2>
         {props.hotels.map((hotel) => (
-          <Hotel {...hotel} key={hotel.id} />
+          <Hotel {...hotel} key={hotel.id} themeColor={props.themeColor} />
         ))}
       </div>
     </div>
