@@ -2,7 +2,7 @@ import Hotel from "./Hotel/Hotel"
 
 const Hotels = (props) => {
   return (
-    <div className="container">
+    <div>
       <div style={{
         border: '1px solid #cdcdcd',
         padding: 10,
