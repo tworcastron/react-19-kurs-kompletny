@@ -5,5 +5,6 @@ const AuthContext = createContext({
   logIn: () => {},
   logOut: () => {},
 })
+AuthContext.displayName = 'AuthContext'
 
 export default AuthContext
