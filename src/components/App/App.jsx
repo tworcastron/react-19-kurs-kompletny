@@ -9,6 +9,7 @@ import Layout from '../Layout/Layout'
 import Footer from '../Footer/Footer'
 import ThemeButton from '../UI/ThemeButton/ThemeButton'
 import ThemeContext from '../../context/ThemeContext'
+import AuthContext from '../../context/AuthContext'
 
 const initHotels = [
   {
@@ -33,6 +34,7 @@ function App() {
   const [hotels, setHotels] = useState([])
   const [loading, setLoading] = useState(true)
   const [themeColor, setThemeColor] = useState('primary') // danger, warning
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     // symulacja pobrania danych z BE
@@ -73,12 +75,18 @@ function App() {
         color: themeColor,
         changeColor,
       }}>
-        <Layout
-          header={header}
-          menu={<Menu />}
-          content={content}
-          footer={<Footer />}
-        />
+        <AuthContext.Provider value={{
+          isAuthenticated: !!user,
+          logIn: () => setUser(true),
+          logOut: () => setUser(null),
+        }}>
+          <Layout
+            header={header}
+            menu={<Menu />}
+            content={content}
+            footer={<Footer />}
+          />
+        </AuthContext.Provider>
       </ThemeContext.Provider>
     </>
   )

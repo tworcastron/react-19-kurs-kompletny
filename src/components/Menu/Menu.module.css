@@ -3,9 +3,18 @@
   margin: 10px 0;
   padding: 10px 20px;
   border: 1px solid #cdcdcd;
+  background-color: #efefef;
+  border-radius: 6px;
 }
 .menuItem {
   display: inline-block;
   text-align: left;
   margin-right: 10px;
+}
+.menuItem a {
+  text-decoration: none;
+  color: #636363;
+}
+.menuItem a:hover {
+  text-decoration: underline;
 }
