@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import Header from '../Header/Header'
 import Hotels from '../Hotels/Hotels'
 import Menu from '../Menu/Menu'
@@ -8,6 +8,7 @@ import Searchbar from '../UI/Searchbar/Searchbar'
 import Layout from '../Layout/Layout'
 import Footer from '../Footer/Footer'
 import ThemeButton from '../UI/ThemeButton/ThemeButton'
+import ThemeContext from '../../context/ThemeContext'
 
 const initHotels = [
   {
@@ -56,23 +57,25 @@ function App() {
 
   return (
     <>
-      <Layout
-        header={
-          <Header>
-            <div className='d-flex' style={{ gap: 10 }}>
-              <Searchbar onSearch={onSearch} themeColor={themeColor}  />
-              <ThemeButton onChange={changeColor} />
-            </div>
-          </Header>
-        }
-        menu={<Menu />}
-        content={
-          loading
-            ? <LoadingIcon />
-            : <Hotels hotels={hotels} themeColor={themeColor} />
-        }
-        footer={<Footer themeColor={themeColor} />}
-      />
+      <ThemeContext.Provider value={themeColor}>
+        <Layout
+          header={
+            <Header>
+              <div className='d-flex' style={{ gap: 10 }}>
+                <Searchbar onSearch={onSearch} />
+                <ThemeButton onChange={changeColor} />
+              </div>
+            </Header>
+          }
+          menu={<Menu />}
+          content={
+            loading
+              ? <LoadingIcon />
+              : <Hotels hotels={hotels} />
+          }
+          footer={<Footer />}
+        />
+      </ThemeContext.Provider>
     </>
   )
 }

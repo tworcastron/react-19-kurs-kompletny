@@ -1,7 +1,9 @@
-import { useState } from "react"
+import { use, useState } from "react"
+import ThemeContext from "../../../context/ThemeContext"
 
 export default function Searchbar(props) {
   const [value, setValue] = useState('')
+  const themeColor = use(ThemeContext)
 
   const styles = { borderRadius: 8, marginRight: 5 }
 
@@ -25,7 +27,7 @@ export default function Searchbar(props) {
       />
       <button
         type="button"
-        className={`btn btn-${props.themeColor}`}
+        className={`btn btn-${themeColor}`}
         onClick={onSearch}
       >
         Szukaj

@@ -1,4 +1,6 @@
+import { use } from 'react'
 import styles from './Hotel.module.css'
+import ThemeContext from '../../../context/ThemeContext'
 // import hotelImg from '../../../assets/images/hotel.jpg'
 
 /**
@@ -13,7 +15,8 @@ import styles from './Hotel.module.css'
  * }} props
  */
 export default function Hotel(props) {
-  const { name, city, rating, description, image, themeColor } = props
+  const { name, city, rating, description, image } = props
+  const themeColor = use(ThemeContext)
 
   return (
     <div className={styles.hotel}>
