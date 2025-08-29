@@ -16,7 +16,7 @@ import ThemeContext from '../../../context/ThemeContext'
  */
 export default function Hotel(props) {
   const { name, city, rating, description, image } = props
-  const themeColor = use(ThemeContext)
+  const themeContext = use(ThemeContext)
 
   return (
     <div className={styles.hotel}>
@@ -40,7 +40,7 @@ export default function Hotel(props) {
       <p className={styles.description}>{description}</p>
 
       <div className="text-end">
-        <button className={`btn btn-${themeColor}`}>Pokaż</button>
+        <button className={`btn btn-${themeContext.color}`}>Pokaż</button>
       </div>
     </div>
   )

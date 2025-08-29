@@ -55,24 +55,28 @@ function App() {
     setThemeColor(themeColor === 'danger' ? 'primary' : 'danger')
   }
 
+  const header = (
+    <Header>
+      <div className='d-flex' style={{ gap: 10 }}>
+        <Searchbar onSearch={onSearch} />
+        <ThemeButton />
+      </div>
+    </Header>
+  )
+  const content = loading
+    ? <LoadingIcon />
+    : <Hotels hotels={hotels} />
+
   return (
     <>
-      <ThemeContext.Provider value={themeColor}>
+      <ThemeContext.Provider value={{
+        color: themeColor,
+        changeColor,
+      }}>
         <Layout
-          header={
-            <Header>
-              <div className='d-flex' style={{ gap: 10 }}>
-                <Searchbar onSearch={onSearch} />
-                <ThemeButton onChange={changeColor} />
-              </div>
-            </Header>
-          }
+          header={header}
           menu={<Menu />}
-          content={
-            loading
-              ? <LoadingIcon />
-              : <Hotels hotels={hotels} />
-          }
+          content={content}
           footer={<Footer />}
         />
       </ThemeContext.Provider>
