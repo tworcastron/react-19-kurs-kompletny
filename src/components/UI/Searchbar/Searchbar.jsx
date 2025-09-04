@@ -1,9 +1,10 @@
-import { use, useState } from "react"
+import { use, useEffect, useRef, useState } from "react"
 import ThemeContext from "../../../context/ThemeContext"
 
 export default function Searchbar(props) {
   const [value, setValue] = useState('')
   const themeContext = use(ThemeContext)
+  const inputRef = useRef(null)
 
   const styles = { borderRadius: 8, marginRight: 5 }
 
@@ -14,9 +15,14 @@ export default function Searchbar(props) {
     if (e.code === 'Enter') onSearch()
   }
 
+  useEffect(() => {
+    inputRef.current.focus()
+  }, [inputRef.current])
+
   return (
     <div className="d-flex">
       <input 
+        ref={inputRef}
         placeholder='Szukaj...'
         style={styles}
         className="form-control"
