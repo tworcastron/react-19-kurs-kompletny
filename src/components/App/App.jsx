@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useReducer, useState } from 'react'
 import Header from '../Header/Header'
 import Hotels from '../Hotels/Hotels'
 import Menu from '../Menu/Menu'
@@ -30,17 +30,52 @@ const initHotels = [
   }
 ]
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'change-color':
+      return {
+        ...state,
+        color: state.color === 'primary' ? 'danger' : 'primary',
+      }
+    case 'set-loading':
+      return {
+        ...state,
+        loading: action.isLoading,
+      }
+    case 'login':
+      return {
+        ...state,
+        user: true,
+      }
+    case 'logout': 
+      return {
+        ...state,
+        user: false,
+      }
+    default:
+      throw new Error(`Nie ma takiej akcji ${action.type}`)
+  }
+}
+const initState = {
+  color: 'primary',
+  loading: true,
+  user: null,
+}
+
 function App() {
   const [hotels, setHotels] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [themeColor, setThemeColor] = useState('primary') // danger, warning
-  const [user, setUser] = useState(null)
+  // const [loading, setLoading] = useState(true)
+  // const [themeColor, setThemeColor] = useState('primary') // danger, warning
+  // const [user, setUser] = useState(null)
+
+  const [state, dispatch] = useReducer(reducer, initState)
 
   useEffect(() => {
     // symulacja pobrania danych z BE
     setTimeout(() => {
       setHotels(initHotels)
-      setLoading(false)
+      // setLoading(false)
+      dispatch({ type: 'set-loading', isLoading: false })
     }, 2000)
   }, [])
 
@@ -54,7 +89,11 @@ function App() {
   }
 
   const changeColor = () => {
-    setThemeColor(themeColor === 'danger' ? 'primary' : 'danger')
+    // sposób useState:
+    // setThemeColor(themeColor === 'danger' ? 'primary' : 'danger')
+
+    // sposób useReduer:
+    dispatch({ type: 'change-color' })
   }
 
   const header = (
@@ -65,20 +104,20 @@ function App() {
       </div>
     </Header>
   )
-  const content = loading
+  const content = state.loading
     ? <LoadingIcon />
     : <Hotels hotels={hotels} />
 
   return (
     <>
       <ThemeContext.Provider value={{
-        color: themeColor,
+        color: state.color,
         changeColor,
       }}>
         <AuthContext.Provider value={{
-          isAuthenticated: !!user,
-          logIn: () => setUser(true),
-          logOut: () => setUser(null),
+          isAuthenticated: !!state.user,
+          logIn: () => dispatch({ type: 'login' }), //setUser(true),
+          logOut: () => dispatch({ type: 'logout' })//setUser(null),
         }}>
           <Layout
             header={header}
