@@ -1,3 +1,4 @@
+import { memo } from "react"
 import Hotel from "./Hotel/Hotel"
 
 const Hotels = (props) => {
@@ -16,4 +17,12 @@ const Hotels = (props) => {
   )
 }
 
-export default Hotels 
+// const propsAreEqual = (prevProps, nextProps) => {
+//   // definiuje czy komponent ma się znowu wyrenderować / odświeżyć
+//   // true - brak odświeżenia
+//   // false - odwieżenie
+//   return prevProps.hotels.length === nextProps.hotels.length
+// }
+
+// export default memo(Hotels, propsAreEqual)
+export default Hotels
