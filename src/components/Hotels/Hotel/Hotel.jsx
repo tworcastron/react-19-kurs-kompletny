@@ -16,7 +16,7 @@ import useAuth from '../../../hooks/useAuth'
  * }} props
  */
 export default function Hotel(props) {
-  const { name, city, rating, description, image } = props
+  const { id, name, city, rating, description, image } = props
   const themeContext = use(ThemeContext)
   const [user] = useAuth()
 
@@ -43,7 +43,7 @@ export default function Hotel(props) {
       <p>Dostępność: {user ? '4 pokoje' : 'Zaloguj'}</p>
 
       <div className="text-end">
-        <button className={`btn btn-${themeContext.color}`}>Pokaż</button>
+        <button onClick={() => props.onShow(id)} className={`btn btn-${themeContext.color}`}>Pokaż</button>
       </div>
     </div>
   )

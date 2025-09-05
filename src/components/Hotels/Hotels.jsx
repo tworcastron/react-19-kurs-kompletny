@@ -1,6 +1,8 @@
 import { memo, useCallback, useMemo } from "react"
 import Hotel from "./Hotel/Hotel"
 import BestHotel from "./BestHotel/BestHotel"
+import LastHotel from "./LastHotel/LastHotel"
+import useLocalStorage from "../../hooks/useLocalStorage"
 
 // const slowFunction = (count) => {
 //   console.log('start')
@@ -10,6 +12,7 @@ import BestHotel from "./BestHotel/BestHotel"
 // }
 
 const Hotels = (props) => {
+  const [lastHotel, setLastHotel] = useLocalStorage('last-hotel', null)
   // wykonuje obliczenia ponownie tylko gdy props.hotels.length się zmienia 
   // const count = useMemo(
   //   () => slowFunction(props.hotels.length),
@@ -24,14 +27,24 @@ const Hotels = (props) => {
     console.log(hotel)
   }, [])
 
+  const showHotel = (id) => {
+    setLastHotel(props.hotels.find(x => x.id === id))
+  }
+
   return (
     <div>
-      {bestHotel && <BestHotel hotel={bestHotel} onShow={showBestHotel} />}
+      {lastHotel && (
+        <LastHotel hotel={lastHotel} onNo={() => setLastHotel(null)} />
+      )}
+
+      {bestHotel && (
+        <BestHotel hotel={bestHotel} onShow={showBestHotel} />
+      )}
 
       <div style={{ padding: '10px 0' }}>
         <h2>Oferty ({ count }):</h2>
         {props.hotels.map((hotel) => (
-          <Hotel {...hotel} key={hotel.id} />
+          <Hotel {...hotel} key={hotel.id} onShow={showHotel} />
         ))}
       </div>
     </div>
