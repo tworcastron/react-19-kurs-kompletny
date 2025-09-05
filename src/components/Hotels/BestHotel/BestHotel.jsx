@@ -14,7 +14,7 @@ function BestHotel(props) {
           <h5 className="card-title">{props.hotel.name}</h5>
           <p>Ocena: {props.hotel.rating}</p>
         </div>
-        <button onClick={props.onShow} className="btn btn-sm btn-light">
+        <button onClick={() => props.onShow(props.hotel)} className="btn btn-sm btn-light">
           Pokaż
         </button>
       </div>

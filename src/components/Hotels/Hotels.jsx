@@ -20,9 +20,9 @@ const Hotels = (props) => {
   const bestHotel = count > 1
     ? [...props.hotels].sort((a,b) => b.rating - a.rating)[0]
     : null
-  const showBestHotel = () => {
-    ///
-  }
+  const showBestHotel = useCallback((hotel) => {
+    console.log(hotel)
+  }, [])
 
   return (
     <div>
