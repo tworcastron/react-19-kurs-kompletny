@@ -1,6 +1,7 @@
 import { use } from 'react'
 import styles from './Hotel.module.css'
 import ThemeContext from '../../../context/ThemeContext'
+import useAuth from '../../../hooks/useAuth'
 // import hotelImg from '../../../assets/images/hotel.jpg'
 
 /**
@@ -17,6 +18,7 @@ import ThemeContext from '../../../context/ThemeContext'
 export default function Hotel(props) {
   const { name, city, rating, description, image } = props
   const themeContext = use(ThemeContext)
+  const [user] = useAuth()
 
   return (
     <div className={styles.hotel}>
@@ -38,6 +40,7 @@ export default function Hotel(props) {
       </div>
 
       <p className={styles.description}>{description}</p>
+      <p>Dostępność: {user ? '4 pokoje' : 'Zaloguj'}</p>
 
       <div className="text-end">
         <button className={`btn btn-${themeContext.color}`}>Pokaż</button>
