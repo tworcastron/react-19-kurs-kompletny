@@ -1,4 +1,7 @@
-export default function BestHotel(props) {
+import { memo } from "react"
+
+function BestHotel(props) {
+  console.log('render best hotel')
   if (!props.hotel) return null
 
   return (
@@ -18,3 +21,9 @@ export default function BestHotel(props) {
     </div>
   )
 }
+
+const propsAreEqual = (prev, next) => {
+  return prev.hotel?.id === next.hotel?.id && prev.onShow === next.onShow
+}
+
+export default memo(BestHotel, propsAreEqual)

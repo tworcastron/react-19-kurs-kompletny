@@ -18,7 +18,7 @@ const Hotels = (props) => {
 
   const count = props.hotels.length
   const bestHotel = count > 1
-    ? props.hotels.sort((a,b) => a.rating - b.rating ? -1 : 1)[0]
+    ? [...props.hotels].sort((a,b) => b.rating - a.rating)[0]
     : null
   const showBestHotel = () => {
     ///
