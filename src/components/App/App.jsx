@@ -1,4 +1,5 @@
 import { createContext, useEffect, useReducer, useState } from 'react'
+import { BrowserRouter, Routes, Route } from "react-router"
 import Header from '../Header/Header'
 import Hotels from '../Hotels/Hotels'
 import Menu from '../Menu/Menu'
@@ -106,12 +107,17 @@ function App() {
       </div>
     </Header>
   )
-  const content = state.loading
-    ? <LoadingIcon />
-    : <Hotels hotels={hotels} />
+  const content = (
+    <Routes>
+      <Route index element={<Hotels hotels={hotels} />} />
+      <Route path='/hotel/:id' element={<h1>To jest strona hotel</h1>} />
+      <Route path='/login' element={<h1>Logowanie</h1>} />
+      <Route path='/register' element={<h1>Rejestracja</h1>} />
+    </Routes>
+  )
 
   return (
-    <>
+    <BrowserRouter>
       <ThemeContext.Provider value={{
         color: state.color,
         changeColor,
@@ -124,12 +130,12 @@ function App() {
           <Layout
             header={header}
             menu={<Menu />}
-            content={content}
+            content={state.loading ? <LoadingIcon /> : content}
             footer={<Footer />}
           />
         </AuthContext.Provider>
       </ThemeContext.Provider>
-    </>
+    </BrowserRouter>
   )
 }
 
