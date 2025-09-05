@@ -26,7 +26,7 @@ const Hotels = (props) => {
 
   return (
     <div>
-      <BestHotel hotel={bestHotel} onShow={showBestHotel} />
+      {bestHotel && <BestHotel hotel={bestHotel} onShow={showBestHotel} />}
 
       <div style={{ padding: '10px 0' }}>
         <h2>Oferty ({ count }):</h2>

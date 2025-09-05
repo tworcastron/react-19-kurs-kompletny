@@ -6,18 +6,19 @@ function BestHotel(props) {
   const [time, setTime] = useState('')
 
   useEffect(() => {
-    setInterval(() => {
+    const interval = setInterval(() => {
       const leftTime = endTime.diff(moment()) / 1000
       const min = Math.round(leftTime / 60)
       const sec = Math.round(leftTime % 60)
 
-      console.log(leftTime)
-
       setTime(`minut: ${min}, sekund: ${sec}`)
     }, 1000)
-  }, [])
 
-  if (!props.hotel) return null
+    return () => {
+      // console.log('unmounted best hotel')
+      clearInterval(interval)
+    }
+  }, [])
 
   return (
     <div className="card bg-success text-white">
