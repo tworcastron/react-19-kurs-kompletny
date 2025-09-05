@@ -1,5 +1,6 @@
-import { memo, useMemo } from "react"
+import { memo, useCallback, useMemo } from "react"
 import Hotel from "./Hotel/Hotel"
+import BestHotel from "./BestHotel/BestHotel"
 
 // const slowFunction = (count) => {
 //   console.log('start')
@@ -16,13 +17,18 @@ const Hotels = (props) => {
   // )
 
   const count = props.hotels.length
+  const bestHotel = count > 1
+    ? props.hotels.sort((a,b) => a.rating - b.rating ? -1 : 1)[0]
+    : null
+  const showBestHotel = () => {
+    ///
+  }
 
   return (
     <div>
-      <div style={{
-        border: '1px solid #cdcdcd',
-        padding: 10,
-      }}>
+      <BestHotel hotel={bestHotel} onShow={showBestHotel} />
+
+      <div style={{ padding: '10px 0' }}>
         <h2>Oferty ({ count }):</h2>
         {props.hotels.map((hotel) => (
           <Hotel {...hotel} key={hotel.id} />
