@@ -10,6 +10,7 @@ import Footer from '../Footer/Footer'
 import ThemeButton from '../UI/ThemeButton/ThemeButton'
 import ThemeContext from '../../context/ThemeContext'
 import AuthContext from '../../context/AuthContext'
+import useWebsiteTitle from '../../hooks/useWebsiteTitle'
 
 const initHotels = [
   {
@@ -63,6 +64,7 @@ const initState = {
 }
 
 function App() {
+  useWebsiteTitle('Strona główna')
   const [hotels, setHotels] = useState([])
   // const [loading, setLoading] = useState(true)
   // const [themeColor, setThemeColor] = useState('primary') // danger, warning
