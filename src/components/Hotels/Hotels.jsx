@@ -23,9 +23,6 @@ const Hotels = (props) => {
   const bestHotel = count > 1
     ? [...props.hotels].sort((a,b) => b.rating - a.rating)[0]
     : null
-  const showBestHotel = useCallback((hotel) => {
-    console.log(hotel)
-  }, [])
 
   const showHotel = (id) => {
     setLastHotel(props.hotels.find(x => x.id === id))
@@ -38,7 +35,7 @@ const Hotels = (props) => {
       )}
 
       {bestHotel && (
-        <BestHotel hotel={bestHotel} onShow={showBestHotel} />
+        <BestHotel hotel={bestHotel} />
       )}
 
       <div style={{ padding: '10px 0' }}>

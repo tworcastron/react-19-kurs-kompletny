@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import useAuth from '../../hooks/useAuth'
 import styles from './Menu.module.css'
 
@@ -17,7 +18,7 @@ export default function Menu() {
     <div>
       <ul className={styles.menu}>
         <li className={styles.menuItem}>
-          <a href="#">Home</a>
+          <Link to="/">Home</Link>
         </li>
         {user ? (
           <li className={styles.menuItem}>
@@ -25,7 +26,7 @@ export default function Menu() {
           </li>
         ) : (
           <li className={styles.menuItem}>
-            <a href="#" onClick={logIn}>Zaloguj</a>
+            <Link to="login">Zaloguj</Link>
           </li>
         )}
       </ul>

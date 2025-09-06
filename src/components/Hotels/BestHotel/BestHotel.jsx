@@ -1,5 +1,6 @@
 import moment from "moment"
 import { memo, useEffect, useState } from "react"
+import { Link } from "react-router"
 
 function BestHotel(props) {
   const endTime = moment().add(23, 'minutes').add(34, 'seconds')
@@ -31,9 +32,9 @@ function BestHotel(props) {
           <p>Ocena: {props.hotel.rating}</p>
         </div>
         <p>Do końca oferty pozostało: {time}</p>
-        <button onClick={() => props.onShow(props.hotel)} className="btn btn-sm btn-light">
+        <Link to={`/hotel/${props.hotel.id}`} className="btn btn-sm btn-light">
           Pokaż
-        </button>
+        </Link>
       </div>
     </div>
   )
