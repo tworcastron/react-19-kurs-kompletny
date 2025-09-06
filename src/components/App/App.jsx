@@ -15,6 +15,7 @@ import HotelPreview from '../../pages/HotelPreview'
 import Search from '../../pages/Search'
 import NotFound from '../../pages/NotFound'
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
+import Login from '../../pages/Auth/Login'
 
 // import Profile from '../../pages/Profile'
 const Profile  = lazy(() => import('../../pages/Profile'))
@@ -37,7 +38,7 @@ function App() {
       <Routes>
         <Route index element={<Home state={state} dispatch={dispatch}/>} />
         <Route path='/hotel/:id' element={<HotelPreview />} />
-        <Route path='/login' element={<h1>Logowanie</h1>} />
+        <Route path='/login' element={<Login />} />
         <Route path='/register' element={<h1>Rejestracja</h1>} />
         <Route path='/szukaj' element={<Search />} />
         <Route element={<AuthenticatedRoute />}>
