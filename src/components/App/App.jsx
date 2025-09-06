@@ -1,4 +1,4 @@
-import { useReducer } from 'react'
+import { useReducer, lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router"
 import Header from '../Header/Header'
 import Menu from '../Menu/Menu'
@@ -13,9 +13,11 @@ import { reducer, initState } from '../../reducer'
 import Home from '../../pages/Home'
 import HotelPreview from '../../pages/HotelPreview'
 import Search from '../../pages/Search'
-import Profile from '../../pages/Profile'
 import NotFound from '../../pages/NotFound'
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
+
+// import Profile from '../../pages/Profile'
+const Profile  = lazy(() => import('../../pages/Profile'))
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initState)
@@ -31,20 +33,22 @@ function App() {
     </Header>
   )
   const content = (
-    <Routes>
-      <Route index element={<Home state={state} dispatch={dispatch}/>} />
-      <Route path='/hotel/:id' element={<HotelPreview />} />
-      <Route path='/login' element={<h1>Logowanie</h1>} />
-      <Route path='/register' element={<h1>Rejestracja</h1>} />
-      <Route path='/szukaj' element={<Search />} />
-      <Route element={<AuthenticatedRoute />}>
-        <Route path='/profil' element={<Profile />}>
-          <Route index element="edytuj" />
-          <Route path='hotele' element="hotele" />
+    <Suspense fallback={'Ładowanie...'}>
+      <Routes>
+        <Route index element={<Home state={state} dispatch={dispatch}/>} />
+        <Route path='/hotel/:id' element={<HotelPreview />} />
+        <Route path='/login' element={<h1>Logowanie</h1>} />
+        <Route path='/register' element={<h1>Rejestracja</h1>} />
+        <Route path='/szukaj' element={<Search />} />
+        <Route element={<AuthenticatedRoute />}>
+          <Route path='/profil' element={<Profile />}>
+            <Route index element="edytuj" />
+            <Route path='hotele' element="hotele" />
+          </Route>
         </Route>
-      </Route>
-      <Route path='*' element={<NotFound />} />
-    </Routes>
+        <Route path='*' element={<NotFound />} />
+      </Routes>
+    </Suspense>
   )
 
   return (
