@@ -15,6 +15,12 @@
   text-decoration: none;
   color: #636363;
 }
+.menuItem a:global.active {
+  font-weight: bold;
+}
+/* .menuItemActive {
+  font-weight: bold;
+} */
 .menuItem a:hover {
   text-decoration: underline;
 }
