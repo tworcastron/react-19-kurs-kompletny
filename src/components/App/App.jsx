@@ -11,6 +11,7 @@ import ThemeContext from '../../context/ThemeContext'
 import AuthContext from '../../context/AuthContext'
 import { reducer, initState } from '../../reducer'
 import Home from '../../pages/Home'
+import HotelPreview from '../../pages/HotelPreview'
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initState)
@@ -36,7 +37,7 @@ function App() {
   const content = (
     <Routes>
       <Route index element={<Home state={state} dispatch={dispatch}/>} />
-      <Route path='/hotel/:id' element={<h1>To jest strona hotel</h1>} />
+      <Route path='/hotel/:id' element={<HotelPreview />} />
       <Route path='/login' element={<h1>Logowanie</h1>} />
       <Route path='/register' element={<h1>Rejestracja</h1>} />
     </Routes>
