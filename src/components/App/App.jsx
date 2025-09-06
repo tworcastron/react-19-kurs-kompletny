@@ -14,6 +14,7 @@ import Home from '../../pages/Home'
 import HotelPreview from '../../pages/HotelPreview'
 import Search from '../../pages/Search'
 import Profile from '../../pages/Profile'
+import NotFound from '../../pages/NotFound'
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initState)
@@ -39,6 +40,7 @@ function App() {
         <Route index element="edytuj" />
         <Route path='hotele' element="hotele" />
       </Route>
+      <Route path='*' element={<NotFound />} />
     </Routes>
   )
 
