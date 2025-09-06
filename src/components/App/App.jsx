@@ -12,24 +12,17 @@ import AuthContext from '../../context/AuthContext'
 import { reducer, initState } from '../../reducer'
 import Home from '../../pages/Home'
 import HotelPreview from '../../pages/HotelPreview'
+import Search from '../../pages/Search'
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initState)
-
-  const onSearch = (query) => {
-    const filteredHotels = state.hotels
-      .filter(hotel => hotel.name.toLocaleLowerCase()
-        .includes(query.toLocaleLowerCase()))
-
-    dispatch({ type: 'set-visible-hotels', hotels: filteredHotels })
-  }
 
   const changeColor = () => dispatch({ type: 'change-color' })
 
   const header = (
     <Header>
       <div className='d-flex' style={{ gap: 10 }}>
-        <Searchbar onSearch={onSearch} />
+        <Searchbar />
         <ThemeButton />
       </div>
     </Header>
@@ -40,6 +33,7 @@ function App() {
       <Route path='/hotel/:id' element={<HotelPreview />} />
       <Route path='/login' element={<h1>Logowanie</h1>} />
       <Route path='/register' element={<h1>Rejestracja</h1>} />
+      <Route path='/szukaj' element={<Search />} />
     </Routes>
   )
 
