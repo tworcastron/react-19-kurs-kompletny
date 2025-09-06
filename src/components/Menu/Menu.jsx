@@ -23,13 +23,15 @@ export default function Menu() {
             // className={({ isActive }) => isActive ? styles.menuItemActive : ''}
           >Home</NavLink>
         </li>
-        <li className={styles.menuItem}>
-          <NavLink to="profil">Mój profil</NavLink>
-        </li>
         {user ? (
-          <li className={styles.menuItem}>
-            <a href="#" onClick={logOut}>Wyloguj</a>
-          </li>
+          <>
+            <li className={styles.menuItem}>
+              <NavLink to="profil">Mój profil</NavLink>
+            </li>
+            <li className={styles.menuItem}>
+              <a href="#" onClick={logOut}>Wyloguj</a>
+            </li>
+          </>
         ) : (
           <li className={styles.menuItem}>
             <NavLink to="login">Zaloguj</NavLink>

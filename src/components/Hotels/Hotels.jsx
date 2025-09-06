@@ -3,6 +3,7 @@ import Hotel from "./Hotel/Hotel"
 import BestHotel from "./BestHotel/BestHotel"
 import LastHotel from "./LastHotel/LastHotel"
 import useLocalStorage from "../../hooks/useLocalStorage"
+import { useNavigate } from "react-router"
 
 // const slowFunction = (count) => {
 //   console.log('start')
@@ -13,6 +14,7 @@ import useLocalStorage from "../../hooks/useLocalStorage"
 
 const Hotels = (props) => {
   const [lastHotel, setLastHotel] = useLocalStorage('last-hotel', null)
+  const navigate = useNavigate()
   // wykonuje obliczenia ponownie tylko gdy props.hotels.length się zmienia 
   // const count = useMemo(
   //   () => slowFunction(props.hotels.length),
@@ -26,12 +28,16 @@ const Hotels = (props) => {
 
   const showHotel = (id) => {
     setLastHotel(props.hotels.find(x => x.id === id))
+    navigate(`/hotel/${id}`)
   }
 
   return (
     <div>
       {lastHotel && (
-        <LastHotel hotel={lastHotel} onNo={() => setLastHotel(null)} />
+        <LastHotel
+          hotel={lastHotel}
+          onNo={() => setLastHotel(null)}
+          onYes={() => navigate(`/hotel/${lastHotel.id}`)} />
       )}
 
       {bestHotel && (
