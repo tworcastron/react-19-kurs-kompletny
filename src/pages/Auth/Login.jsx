@@ -32,29 +32,29 @@ export default function Login() {
   }
 
   const getEmailClassName = () => {
-    // if (!email) return ''
+    if (!email) return ''
 
     return errors.email ? 'is-invalid' : 'is-valid'
   }
   const getPasswordClassName = () => {
-    // if (!password) return ''
+    if (!password) return ''
 
     return errors.password ? 'is-invalid' : 'is-valid'
   }
 
   useEffect(() => {
     if (validatePassword(password)) {
-      setErrors({ ...errors, password: ''})
+      setErrors(current => ({ ...current, password: ''}))
     } else {
-      setErrors({ ...errors, password: 'Wymagane 4 znaki'})
+      setErrors(current => ({ ...current, password: 'Wymagane 4 znaki'}))
     }
   }, [password])
 
   useEffect(() => {
     if (validateEmail(email)) {
-      setErrors({ ...errors, email: ''})
+      setErrors(current => ({ ...current, email: ''}))
     } else {
-      setErrors({ ...errors, email: 'Niepoprawny email'})
+      setErrors(current => ({ ...current, email: 'Niepoprawny email'}))
     }
   }, [email])
 
