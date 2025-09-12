@@ -1,7 +1,8 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import useAuth from '../../hooks/useAuth'
 import { useNavigate } from "react-router"
 import Button from "../../components/UI/Button/Button"
+import { validateEmail, validatePassword } from '../../lib/validators'
 
 export default function Login() {
   // const emailRef = useRef()
@@ -10,6 +11,11 @@ export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const [errors, setErrors] = useState({
+    email: '',
+    password: '',
+  })
+  const isValid = !!email && !!password && Object.values(errors).filter(x => x).length === 0
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -25,6 +31,34 @@ export default function Login() {
     }, 500)
   }
 
+  const getEmailClassName = () => {
+    // if (!email) return ''
+
+    return errors.email ? 'is-invalid' : 'is-valid'
+  }
+  const getPasswordClassName = () => {
+    // if (!password) return ''
+
+    return errors.password ? 'is-invalid' : 'is-valid'
+  }
+
+  useEffect(() => {
+    if (validatePassword(password)) {
+      setErrors({ ...errors, password: ''})
+    } else {
+      setErrors({ ...errors, password: 'Wymagane 4 znaki'})
+    }
+  }, [password])
+
+  useEffect(() => {
+    if (validateEmail(email)) {
+      setErrors({ ...errors, email: ''})
+    } else {
+      setErrors({ ...errors, email: 'Niepoprawny email'})
+    }
+  }, [email])
+
+
   return (
     <div className="card">
       <div className="card-header">Logowanie</div>
@@ -35,7 +69,14 @@ export default function Login() {
             value={email}
             onChange={e => setEmail(e.target.value)}
             type="email"
-            className="form-control" />
+            required
+            className={'form-control ' + getEmailClassName()} />
+          <div className="invalid-feedback">
+            {errors.email}
+          </div>
+          <div className="valid-feedback">
+            Wszystko gra!
+          </div>
         </div>
         <div className="mb-3">
           <label className="form-label">Hasło</label>
@@ -43,9 +84,16 @@ export default function Login() {
             value={password}
             onChange={e => setPassword(e.target.value)}
             type="password"
-            className="form-control" />
+            required
+            className={`form-control ${getPasswordClassName()}`} />
+          <div className="invalid-feedback">
+            {errors.password}
+          </div>
+          <div className="valid-feedback">
+            Wszystko gra!
+          </div>
         </div>
-        <Button loading={loading}>Zaloguj</Button>
+        <Button loading={loading} disabled={!isValid}>Zaloguj</Button>
       </form>
     </div>
   )
