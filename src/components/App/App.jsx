@@ -16,6 +16,7 @@ import Search from '../../pages/Search'
 import NotFound from '../../pages/NotFound'
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
 import Login from '../../pages/Auth/Login'
+import EditProfile from '../../pages/EditProfile'
 
 // import Profile from '../../pages/Profile'
 const Profile  = lazy(() => import('../../pages/Profile'))
@@ -43,7 +44,7 @@ function App() {
         <Route path='/szukaj' element={<Search />} />
         <Route element={<AuthenticatedRoute />}>
           <Route path='/profil' element={<Profile />}>
-            <Route index element="edytuj" />
+            <Route index element={<EditProfile />} />
             <Route path='hotele' element="hotele" />
           </Route>
         </Route>
