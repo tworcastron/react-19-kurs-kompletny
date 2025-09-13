@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "../../components/UI/Button/Button";
 import Input from "../../components/UI/Input/Input";
 import { validate } from "../../lib/validators";
+import axios from "axios";
 
 export default function Register() {
   const [loading, setLoading] = useState(false)
@@ -12,14 +13,14 @@ export default function Register() {
   const passError = validate(['required'], password)
   const isValid = !emailError && !passError
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
 
-    setTimeout(() => {
       setLoading(false)
-      console.log(email, password)
-    }, 1000)
+
+    const res = await axios.post('https://react-19-kurs-default-rtdb.europe-west1.firebasedatabase.app/users.json')
+    console.log(res.data)
   }
 
   return (
