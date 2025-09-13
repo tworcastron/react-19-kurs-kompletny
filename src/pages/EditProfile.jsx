@@ -14,7 +14,12 @@ const initState = {
 
 export default function EditProfile() {
   const [user] = useAuth()
-  const [state, formAction, isPending] = useActionState(editProfileAction, initState)
+
+  const actionFn = (prevState, formData) => {
+    return editProfileAction(prevState, formData, user.idToken)
+  }
+
+  const [state, formAction, isPending] = useActionState(actionFn, initState)
   // const [email, setEmail] = useState('adam@tworcastron.pl')
 
   return (
