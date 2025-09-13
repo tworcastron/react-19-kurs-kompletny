@@ -15,6 +15,8 @@ const listOfRules = {
 }
 
 export const validate = (rules, value) => {
+  if (!rules) return ''
+
   for (const ruleName of rules) {
     const result = listOfRules[ruleName](value)
 

@@ -3,7 +3,7 @@ import Input from "../../components/UI/Input/Input";
 import { validate } from "../../lib/validators";
 import Button from '../../components/UI/Button/Button'
 
-export default function HotelForm() {
+export default function HotelForm(props) {
   const [form, setForm] = useState({
     title: {
       value: '',
@@ -54,8 +54,21 @@ export default function HotelForm() {
     setForm({ ...form, [field]: newValue })
   }
 
+  const onSubmit = (e) => {
+    e.preventDefault()
+    props.onSubmit({
+      title: form.title.value,
+      city: form.city.value,
+      description: form.city.value,
+      rooms: form.rooms.value,
+      // file: form.file.value,
+      status: form.status.value,
+      features: form.features.value,
+    })
+  }
+
   return (
-    <>
+    <form onSubmit={onSubmit}>
       <Input 
         label="Nazwa"
         value={form.title.value}
@@ -116,6 +129,6 @@ export default function HotelForm() {
       <div className="mt-4 text-end">
         <Button disabled={!isValid}>Zapisz</Button>
       </div>
-    </>
+    </form>
   )
 }
