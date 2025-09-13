@@ -3,6 +3,7 @@ import useAuth from '../../hooks/useAuth'
 import { useNavigate } from "react-router"
 import Button from "../../components/UI/Button/Button"
 import { validateEmail, validatePassword } from '../../lib/validators'
+import axiosAuth from '../../axiosAuth'
 
 export default function Login() {
   // const emailRef = useRef()
@@ -15,20 +16,26 @@ export default function Login() {
     email: '',
     password: '',
   })
+  const [error, setError] = useState('')
   const isValid = !!email && !!password && Object.values(errors).filter(x => x).length === 0
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
 
-    // console.log(emailRef.current.value)
-    console.log(email)
-    // symulacja logowania
-    setTimeout(() => {
-      setUser(true)
+    try {
+      const res = await axiosAuth.post('/accounts:signInWithPassword', {
+        email,
+        password,
+        returnSecureToken: true
+      })
+      setUser(true, res.data)
       navigate('/profil')
-      setLoading(false)
-    }, 500)
+    } catch (err) {
+      setError(err.response.data.error.message)
+    }
+
+    setLoading(false)
   }
 
   const getEmailClassName = () => {
@@ -93,6 +100,9 @@ export default function Login() {
             Wszystko gra!
           </div>
         </div>
+
+        {error && <div className="alert alert-danger">{error}</div>}
+
         <Button loading={loading} disabled={!isValid}>Zaloguj</Button>
       </form>
     </div>
