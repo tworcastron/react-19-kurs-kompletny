@@ -2,6 +2,7 @@ export default function Input(props) {
   switch (props.type) {
     case 'select': return <InputSelect {...props} />
     case 'text': return <InputText {...props} />
+    case 'password': return <InputText {...props} type="password" />
     case 'textarea': return <InputTextarea {...props} />
     case 'file': return <InputFile {...props} />
     case 'checkbox': return <InputCheckbox {...props} />
@@ -15,7 +16,8 @@ function InputText(props) {
       <label className="form-label">{props.label}</label>
       <input className={`form-control ${props.error ? 'is-invalid' : ''}`} 
         value={props.value}
-        onChange={e => props.onChange(e.target.value)} />
+        onChange={e => props.onChange(e.target.value)}
+        type={props.type ?? 'text'} />
       <div className="invalid-feedback">{props.error}</div>
     </div>
   )

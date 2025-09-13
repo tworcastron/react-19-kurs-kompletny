@@ -33,9 +33,14 @@ export default function Menu() {
             </li>
           </>
         ) : (
-          <li className={styles.menuItem}>
-            <NavLink to="login">Zaloguj</NavLink>
-          </li>
+          <>
+            <li className={styles.menuItem}>
+              <NavLink to="logowanie">Zaloguj</NavLink>
+            </li>
+            <li className={styles.menuItem}>
+              <NavLink to="rejestracja">Rejestracja</NavLink>
+            </li>
+          </>
         )}
       </ul>
     </div>
