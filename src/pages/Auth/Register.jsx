@@ -2,9 +2,13 @@ import { useState } from "react";
 import Button from "../../components/UI/Button/Button";
 import Input from "../../components/UI/Input/Input";
 import { validate } from "../../lib/validators";
-import axios from "../../axios";
+import axiosAuth from "../../axiosAuth";
+import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router";
 
 export default function Register() {
+  const navigate = useNavigate()
+  const [user, setUser] = useAuth()
   const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -17,10 +21,16 @@ export default function Register() {
     e.preventDefault()
     setLoading(true)
 
-      setLoading(false)
-
-    const res = await axios.get('/users.json')
+    const res = await axiosAuth.post('/accounts:signUp', {
+      email,
+      password,
+      returnSecureToken: true
+    })
+    setUser(true, res.data)
+    navigate('/profil')
     console.log(res.data)
+
+    setLoading(false)
   }
 
   return (

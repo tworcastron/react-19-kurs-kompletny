@@ -7,11 +7,13 @@ export default function useAuth() {
 
   useDebugValue(user, (user) => user ? 'Zalogowany' : 'Wylogowany')
 
-  const setUser = (value) => {
+  const setUser = (value, userData = null) => {
     if (value) {
       authContext.logIn()
+      if (userData) window.localStorage.setItem('user', userData)
     } else {
       authContext.logOut()
+      window.localStorage.removeItem('user')
     }
   }
 
