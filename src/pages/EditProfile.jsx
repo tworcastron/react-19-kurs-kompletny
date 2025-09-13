@@ -1,6 +1,7 @@
 import { useActionState, useEffect, useState } from "react";
 import Button from "../components/UI/Button/Button";
 import { editProfileAction } from '../actions/editProfileAction'
+import useAuth from "../hooks/useAuth";
 
 const initState = {
   success: null,
@@ -12,6 +13,7 @@ const initState = {
 }
 
 export default function EditProfile() {
+  const [user] = useAuth()
   const [state, formAction, isPending] = useActionState(editProfileAction, initState)
   // const [email, setEmail] = useState('adam@tworcastron.pl')
 
@@ -31,7 +33,7 @@ export default function EditProfile() {
             type="email"
             required
             name="email"
-            defaultValue={state.values.email}
+            defaultValue={state.values.email || user.email}
             className={'form-control'}/>
         </div>
         <div className="mb-3">

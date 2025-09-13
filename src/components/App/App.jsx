@@ -1,4 +1,4 @@
-import { useReducer, lazy, Suspense } from 'react'
+import { useReducer, lazy, Suspense, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router"
 import Header from '../Header/Header'
 import Menu from '../Menu/Menu'
@@ -26,6 +26,13 @@ const Profile  = lazy(() => import('../../pages/Profile'))
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initState)
+
+  useEffect(() => {
+    // sprawdzić stan użytkownika
+    if (window.localStorage.getItem('user')) {
+      dispatch({ type: 'login' })
+    }
+  }, [])
 
   const changeColor = () => dispatch({ type: 'change-color' })
 

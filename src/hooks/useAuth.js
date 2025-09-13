@@ -19,5 +19,7 @@ export default function useAuth() {
     }
   }
 
-  return [user, setUser]
+  const userData = JSON.parse(window.localStorage.getItem('user'))
+
+  return [user ? userData : false, setUser]
 }
