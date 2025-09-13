@@ -8,7 +8,7 @@ export default function AuthenticatedRoute() {
 
   useEffect(() => {
     if (!user) {
-      navigate('/login')
+      navigate('/logowanie')
     }
   }, [user])
 

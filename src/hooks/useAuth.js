@@ -10,7 +10,9 @@ export default function useAuth() {
   const setUser = (value, userData = null) => {
     if (value) {
       authContext.logIn()
-      if (userData) window.localStorage.setItem('user', userData)
+      if (userData) {
+        window.localStorage.setItem('user', JSON.stringify(userData))
+      }
     } else {
       authContext.logOut()
       window.localStorage.removeItem('user')

@@ -12,6 +12,7 @@ export default function Register() {
   const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
 
   const emailError = validate(['required', 'email'], email)
   const passError = validate(['required'], password)
@@ -21,14 +22,17 @@ export default function Register() {
     e.preventDefault()
     setLoading(true)
 
-    const res = await axiosAuth.post('/accounts:signUp', {
-      email,
-      password,
-      returnSecureToken: true
-    })
-    setUser(true, res.data)
-    navigate('/profil')
-    console.log(res.data)
+    try {
+      const res = await axiosAuth.post('/accounts:signUp', {
+        email,
+        password,
+        returnSecureToken: true
+      })
+      setUser(true, res.data)
+      navigate('/profil')
+    } catch (err) {
+      setError(err.response.data.error.message)
+    }
 
     setLoading(false)
   }
@@ -41,6 +45,8 @@ export default function Register() {
           value={email} error={emailError} onChange={setEmail} />
         <Input label="Hasło"
           value={password} error={passError} onChange={setPassword} type="password" />
+
+        {error && <div className="alert alert-danger">{error}</div>}
 
         <Button disabled={!isValid} loading={loading}>Gotowe!</Button>
       </form>

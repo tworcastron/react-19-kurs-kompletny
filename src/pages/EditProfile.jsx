@@ -6,7 +6,7 @@ const initState = {
   success: null,
   errors: [],
   values: {
-    email: 'adam@tworcastron.pl',
+    email: '',
     password: ''
   }
 }
