@@ -8,15 +8,14 @@ import useAuth from '../../../hooks/useAuth'
  * Hotel component
  * @param {{
  *  id: number;
- *  name: string;
+ *  title: string;
  *  city: string;
  *  rating: string;
  *  description: string;
- *  image: string;
  * }} props
  */
 export default function Hotel(props) {
-  const { id, name, city, rating, description, image } = props
+  const { id, title, city, rating, description } = props
   const themeContext = use(ThemeContext)
   const [user] = useAuth()
 
@@ -24,16 +23,16 @@ export default function Hotel(props) {
     <div className={styles.hotel}>
       <div className="row">
         <div className="col-4">
-          <img src={image} alt='' className='img-fluid img-thumbnail' />
+          <img src={'https://picsum.photos/id/237/300/200'} alt='' className='img-fluid img-thumbnail' />
         </div>
         <div className="col-8">
           <div className="row">
             <div className="col-6">
-              <p><b>{name}</b></p>
+              <p><b>{title}</b></p>
               <span className="badge text-bg-light">{city}</span>
             </div>
             <div className="col-6">
-              <p><b>Ocena: {rating}</b></p>
+              <p><b>Ocena: {rating ?? 'brak'}</b></p>
             </div>
           </div>
         </div>

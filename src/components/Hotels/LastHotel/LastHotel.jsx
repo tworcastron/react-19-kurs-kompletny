@@ -6,7 +6,7 @@ export default function LastHotel(props) {
       </div>
       <div className="card-body">
         <div className="d-flex justify-content-between">
-          <h5 className="card-title">{props.hotel.name}</h5>
+          <h5 className="card-title">{props.hotel.title}</h5>
           <p><span className="badge text-bg-dark">{props.hotel.city}</span></p>
         </div>
         <button onClick={props.onYes} className="btn btn-sm btn-dark me-2">

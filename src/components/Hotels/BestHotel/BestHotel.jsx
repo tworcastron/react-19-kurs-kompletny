@@ -28,7 +28,7 @@ function BestHotel(props) {
       </div>
       <div className="card-body">
         <div className="d-flex justify-content-between">
-          <h5 className="card-title">{props.hotel.name}</h5>
+          <h5 className="card-title">{props.hotel.title}</h5>
           <p>Ocena: {props.hotel.rating}</p>
         </div>
         <p>Do końca oferty pozostało: {time}</p>
