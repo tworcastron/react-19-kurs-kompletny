@@ -59,7 +59,7 @@ export default function HotelForm(props) {
     props.onSubmit({
       title: form.title.value,
       city: form.city.value,
-      description: form.city.value,
+      description: form.description.value,
       rooms: form.rooms.value,
       // file: form.file.value,
       status: form.status.value,
