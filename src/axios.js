@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-  baseURL: 'https://react-19-kurs-default-rtdb.europe-west1.firebasedatabase.app'
+  baseURL: import.meta.env.VITE_DATABASE
 })
 
 export default instance

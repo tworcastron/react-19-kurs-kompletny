@@ -1,9 +1,9 @@
 import axios from 'axios'
 
 const instance = axios.create({
-  baseURL: 'https://identitytoolkit.googleapis.com/v1',
+  baseURL: import.meta.env.VITE_DATABASE_AUTH,
   params: {
-    key: 'AIzaSyCqnoyvSG7X2urzhnPSBkhi1f84s-STUlo'
+    key: import.meta.env.VITE_AUTH_KEY
   }
 })
 
