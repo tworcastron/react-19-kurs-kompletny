@@ -4,6 +4,8 @@ import LoadingIcon from "../components/UI/LoadingIcon/LoadingIcon"
 import useWebsiteTitle from "../hooks/useWebsiteTitle"
 import Hotel from "../components/Hotels/Hotel/Hotel"
 import { useSearchParams } from "react-router"
+import axios from '../axios'
+import { objectToArrayWithId } from "../lib/objects"
 
 export default function Search() {
   useWebsiteTitle('Wyniki wyszukiwania')
@@ -16,14 +18,16 @@ export default function Search() {
   useEffect(() => {
     setLoading(true)
 
-    // symulacja pobrania danych z BE
-    setTimeout(() => {
-      const foundHotels = initHotels
-        .filter(x => x.name.toLocaleLowerCase().includes(query.toLocaleLowerCase()))
+    const fetchResults = async () => {
+      const res = await axios.get('/hotels.json')
+      const foundHotels = objectToArrayWithId(res.data)
+        .filter(hotel => hotel.status === '1')
+        .filter(x => x.title.toLocaleLowerCase().includes(query.toLocaleLowerCase()))
         
       setHotels(foundHotels)
       setLoading(false)
-    }, 500)
+    }
+    fetchResults()
   }, [query])
   
   if (loading) return <LoadingIcon /> 
