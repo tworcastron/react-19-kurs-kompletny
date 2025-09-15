@@ -40,6 +40,7 @@ export default function MyHotels() {
           <thead>
             <tr>
               <th>Nazwa</th>
+              <th>Stauts</th>
               <th>Opcje</th>
             </tr>
           </thead>
@@ -47,8 +48,9 @@ export default function MyHotels() {
             {hotels.map(hotel => (
               <tr key={hotel.id}>
                 <td>{hotel.title}</td>
+                <td>{hotel.status ? 'Aktywny' : 'Ukryty'}</td>
                 <td>
-                  <button className="btn btn-warning">Edytuj</button>
+                  <Link to={`/profil/edytuj-hotel/${hotel.id}`} className="btn btn-warning">Edytuj</Link>
                   <button className="btn btn-danger ms-2" onClick={() => deleteHandler(hotel.id)}>Usuń</button>
                 </td>
               </tr>

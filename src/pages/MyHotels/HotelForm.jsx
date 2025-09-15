@@ -1,9 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../../components/UI/Input/Input";
 import { validate } from "../../lib/validators";
 import Button from '../../components/UI/Button/Button'
 
 export default function HotelForm(props) {
+  useEffect(() => {
+    if (props.hotel) {
+      onInputChange('title', props.hotel.title)
+      onInputChange('city', props.hotel.city)
+      onInputChange('description', props.hotel.description)
+      onInputChange('rooms', props.hotel.rooms)
+      onInputChange('status', props.hotel.status)
+      onInputChange('features', props.hotel.features)
+    }
+  }, [props.hotel])
+
   const [form, setForm] = useState({
     title: {
       value: '',
@@ -51,7 +62,7 @@ export default function HotelForm(props) {
       value,
       error: validate(form[field].rules, value)
     }
-    setForm({ ...form, [field]: newValue })
+    setForm(prev => ({ ...prev, [field]: newValue }))
   }
 
   const onSubmit = (e) => {

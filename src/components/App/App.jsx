@@ -20,6 +20,7 @@ import EditProfile from '../../pages/EditProfile'
 import MyHotels from '../../pages/MyHotels/MyHotels'
 import AddHotel from '../../pages/MyHotels/AddHotel'
 import Register from '../../pages/Auth/Register'
+import EditHotel from '../../pages/MyHotels/EditHotel'
 
 // import Profile from '../../pages/Profile'
 const Profile  = lazy(() => import('../../pages/Profile'))
@@ -57,6 +58,7 @@ function App() {
             <Route index element={<EditProfile />} />
             <Route path='hotele' element={<MyHotels />} />
             <Route path='dodaj-hotel' element={<AddHotel />} />
+            <Route path='edytuj-hotel/:id' element={<EditHotel />} />
           </Route>
         </Route>
         <Route path='*' element={<NotFound />} />
