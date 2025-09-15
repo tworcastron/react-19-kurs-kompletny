@@ -21,7 +21,7 @@ export default function EditHotel() {
   }, [id])
 
   const editHotel = async (values) => {
-    await axios.put(`/hotels/${id}.json`, {
+    await axios.put(`/hotels/${id}.json?auth=${user.idToken}`, {
       ...values,
       userId: user.localId,
     })

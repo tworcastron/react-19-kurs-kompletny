@@ -20,7 +20,7 @@ export default function MyHotels() {
     if (!window.confirm('Czy na pewno chcesz usunąć hotel?')) return
 
     try {
-      await axios.delete(`/hotels/${id}.json`)
+      await axios.delete(`/hotels/${id}.json?auth=${user.idToken}`)
       setHotels(hotels.filter(x => x.id !== id))
     } catch(er) {
       // 

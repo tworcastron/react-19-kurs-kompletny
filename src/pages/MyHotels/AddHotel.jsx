@@ -8,7 +8,7 @@ export default function AddHotel() {
   const navigate = useNavigate()
 
   const addHotel = async (values) => {
-    await axios.post('/hotels.json', {
+    await axios.post(`/hotels.json?auth=${user.idToken}`, {
       ...values,
       userId: user.localId,
     })
