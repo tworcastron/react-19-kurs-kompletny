@@ -1,5 +1,6 @@
 import withMousePosition from '../../hoc/withMousePosition'
-import InspirngQuote from '../UI/InspirngQuote/InspirngQuote'
+// import InspirngQuote from '../UI/InspirngQuote/InspirngQuote'
+import InspirngQuote from '../UI/InspirngQuote/InspirngQuoteClass'
 import styles from './Header.module.scss'
 
 function Header(props) {
