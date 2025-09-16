@@ -21,6 +21,7 @@ import MyHotels from '../../pages/MyHotels/MyHotels'
 import AddHotel from '../../pages/MyHotels/AddHotel'
 import Register from '../../pages/Auth/Register'
 import EditHotel from '../../pages/MyHotels/EditHotel'
+import ErrorBoundary from '../../hoc/ErrorBoundary'
 
 // import Profile from '../../pages/Profile'
 const Profile  = lazy(() => import('../../pages/Profile'))
@@ -67,25 +68,27 @@ function App() {
   )
 
   return (
-    <BrowserRouter>
-      <ThemeContext.Provider value={{
-        color: state.color,
-        changeColor,
-      }}>
-        <AuthContext.Provider value={{
-          isAuthenticated: !!state.user,
-          logIn: () => dispatch({ type: 'login' }),
-          logOut: () => dispatch({ type: 'logout' })
+    <ErrorBoundary>
+      <BrowserRouter>
+        <ThemeContext.Provider value={{
+          color: state.color,
+          changeColor,
         }}>
-          <Layout
-            header={header}
-            menu={<Menu />}
-            content={content}
-            footer={<Footer />}
-          />
-        </AuthContext.Provider>
-      </ThemeContext.Provider>
-    </BrowserRouter>
+          <AuthContext.Provider value={{
+            isAuthenticated: !!state.user,
+            logIn: () => dispatch({ type: 'login' }),
+            logOut: () => dispatch({ type: 'logout' })
+          }}>
+            <Layout
+              header={header}
+              menu={<Menu />}
+              content={content}
+              footer={<Footer />}
+            />
+          </AuthContext.Provider>
+        </ThemeContext.Provider>
+      </BrowserRouter>
+    </ErrorBoundary>
   )
 }
 
